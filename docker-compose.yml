@@ -1,0 +1,194 @@
+version: '3.9'
+
+services:
+  grafana:
+    image: grafana/grafana:9.3.2
+    container_name: grafana
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - private
+
+  rabbitmq:
+    build:
+      context: ./rabbitmq
+      dockerfile: Dockerfile
+    hostname: rabbitmq
+    restart: always
+    container_name: rabbitmq-service
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ./backend-rabbitmq/etc/:/etc/backend/
+      - ./backend-rabbitmq/data/:/var/lib/backend/
+      - ./backend-rabbitmq/logs/:/var/log/backend/
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-user_metadata}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-user_metadata}
+      - RABBITMQ_NODENAME=rabbitnode@localhost
+      - RABBITMQ_USERNAME=user_metadata
+      - RABBITMQ_PASSWORD=user_metadata
+    networks:
+      - private
+
+  postgres:
+    image: postgres:15.0-alpine
+    #restart: unless-stopped
+    restart: always
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=db
+    ports:
+      - '5442:5432'
+    volumes:
+      - /var/opt/tti_monitoring/pg_data:/var/lib/postgresql/data/pgdata
+    networks:
+      - private
+
+  pgadmin:
+    image: dpage/pgadmin4:6.15
+    restart: unless-stopped
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=test@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=metadata
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - private
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: backend.Dockerfile
+    container_name: api-backend
+    command: python  /opt/code/backend/main.py
+    env_file:
+      - ./backend/ENV/api.env
+    ports:
+      - "5000:80"
+    environment:
+      - TTI_AUTH=Bearer NNSXS.ExamplePassword
+    volumes:
+      - ./apicelery:/opt/code/backend/apicelery
+    depends_on:
+      - rabbitmq
+      - postgres
+    networks:
+      - private
+    #restart: always
+
+  api-celery:
+    build:
+      context: ./apicelery
+      dockerfile: celery.Dockerfile
+    container_name: metadata-apicelery
+    command: celery -A apicelery.worker.celery_app worker --loglevel=INFO
+    env_file:
+      - ./apicelery/ENV/apicelery.env
+    ports:
+      - "5008:5008"
+    networks:
+      - private
+    depends_on:
+      - backend
+      - rabbitmq
+      - postgres
+    restart: on-failure
+
+  stream_event_logger:
+    build:
+      context: ./stream_event_logger
+      dockerfile: stream_event_logger.Dockerfile
+    container_name: stream_event_logger_service
+    command: python  ./stream_event_logger/main.py
+    env_file:
+      - ./stream_event_logger/ENV/stream_event_logger.env
+    environment:
+      - TTI_AUTH_TOKEN=Bearer NNSXS.ExamplePassword
+    networks:
+      - private
+    depends_on:
+      - rabbitmq
+      - backend
+      - postgres
+    restart: always
+
+  tti_message_logger:
+    build:
+      context: ./tti_message_logger
+      dockerfile: tti_message_logger.Dockerfile
+    container_name: tti_message_logger_service
+    command: python  ./tti_message_logger/main.py
+    env_file:
+      - ./tti_message_logger/ENV/tti-message-logger.env
+    environment:
+      - TTI_AUTH_TOKEN=Bearer NNSXS.ExamplePassword
+    networks:
+      - private
+    depends_on:
+      - rabbitmq
+      - backend
+      - postgres
+    restart: always
+
+  stream_event_consumer:
+    build:
+      context: ./stream_event_consumer
+      dockerfile: stream_event_consumer.Dockerfile
+    container_name: stream_event_consumer
+    command: python  ./stream_event_consumer/main.py
+    env_file:
+      - ./stream_event_consumer/ENV/stream_event_consumer.env
+    networks:
+      - private
+    depends_on:
+      - rabbitmq
+      - backend
+      - postgres
+      - stream_event_logger
+    restart: always
+
+  tti_message_consumer:
+    build:
+      context: ./tti_message_consumer
+      dockerfile: tti_message_consumer.Dockerfile
+    container_name: tti_message_consumer
+    command: python  ./tti_message_consumer/main.py
+    env_file:
+      - ./tti_message_consumer/ENV/tti-message-consumer.env
+    networks:
+      - private
+    depends_on:
+      - rabbitmq
+      - backend
+      - postgres
+      - stream_event_logger
+    restart: always
+
+  kpi_calculation:
+    build:
+      context: ./kpi_calculation
+      dockerfile: kpi_calculation.Dockerfile
+    container_name: kpi_calculation
+    command: python  ./kpi_calculation/main.py
+    environment:
+      - KPI_CALCULATION_CYCLE=70
+    env_file:
+      - ./kpi_calculation/ENV/kpi-calculation.env
+    networks:
+      - private
+    depends_on:
+      - rabbitmq
+      - backend
+      - postgres
+    restart: always
+
+networks:
+  private:
+    driver: bridge

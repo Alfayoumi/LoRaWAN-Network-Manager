@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+#  test-backend:
+#    build:
+#      context: ./backend
+#      dockerfile: test_backend.Dockerfile
+#    container_name: tests_backend
+#
+#  test-apicelery:
+#    build:
+#      context: ./apicelery
+#      dockerfile: test_apicelery.Dockerfile
+#    container_name: tests_apicelery
+#
+#  test-stream_event_logger:
+#    build:
+#      context: ./stream_event_logger
+#      dockerfile: test_stream_event_logger.Dockerfile
+#    container_name: tests_stream_event_logger
+
+  test-tti_message_logger:
+    build:
+      context: ./tti_message_logger
+      dockerfile: test_tti_message_logger.Dockerfile
+    container_name: tests_tti_message_logger
+#
+#  test-stream_event_consumer:
+#    build:
+#      context: ./stream_event_consumer
+#      dockerfile: test_stream_event_consumer.Dockerfile
+#    container_name: tests_stream_event_consumer
+#
+#  test-tti_message_consumer:
+#    build:
+#      context: ./tti_message_consumer
+#      dockerfile: test_tti_message_consumer.Dockerfile
+#    container_name: tests_tti_message_consumer
+#
+#  test-kpi_calculation:
+#    build:
+#      context: ./kpi_calculation
+#      dockerfile: test_kpi_calculation.Dockerfile
+#    container_name: tests_kpi_calculation

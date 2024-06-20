@@ -1,0 +1,7 @@
+[run]
+omit =
+    env*/**
+    _env*/**
+    tests/**
+[report]
+include=*

@@ -1,0 +1,3071 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 8,
+      "panels": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "align": "center",
+                "displayMode": "color-text",
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 2,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "9.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "rawQuery": true,
+              "rawSql": "SELECT gateway_id, gateway_eui, protocol, fpga, hal, ttn_lw_gateway_server, longitude, latitude, source, ip FROM gatewayconnectionstats WHERE gateway_id = '$gateways' ",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [
+                      {
+                        "name": "gateway_id",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "gateway_eui",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "protocol",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "fpga",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "hal",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "ttn_lw_gateway_server",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "longitude",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "latitude",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "source",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "ip",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "9bb98b99-0123-4456-b89a-b185bf71e9f6",
+                      "properties": {
+                        "field": "gateway_id",
+                        "operator": "equal",
+                        "value": [
+                          "$gateways"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "99b8b888-89ab-4cde-b012-3185bf6347da",
+                  "type": "group"
+                },
+                "whereString": "gateway_id = '$gateways'"
+              },
+              "table": "gatewayconnectionstats"
+            }
+          ],
+          "title": "Gateway General Information",
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "displayMode": "auto",
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 6
+          },
+          "id": 3,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "9.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "rawQuery": true,
+              "rawSql": "SELECT connected_at, boot_time, last_status_time, last_uplink_received_at, last_downlink_received_at, last_status_received_at FROM gatewayconnectionstats WHERE gateway_id = '$gateways'  ",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [
+                      {
+                        "name": "connected_at",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "boot_time",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "last_status_time",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "last_uplink_received_at",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "last_downlink_received_at",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "last_status_received_at",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "9bb98b99-0123-4456-b89a-b185bf71e9f6",
+                      "properties": {
+                        "field": "gateway_id",
+                        "operator": "equal",
+                        "value": [
+                          "$gateways"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "99b8b888-89ab-4cde-b012-3185bf6347da",
+                  "type": "group"
+                },
+                "whereString": "gateway_id = '$gateways'"
+              },
+              "table": "gatewayconnectionstats"
+            }
+          ],
+          "title": "Gateway Time connection Information",
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "displayMode": "color-text",
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 15,
+            "x": 0,
+            "y": 11
+          },
+          "id": 4,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "9.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "rawQuery": true,
+              "rawSql": "SELECT uplink_count, downlink_count, txin, txok, lpps, rxin, rxok, rxfw, ackr FROM gatewayconnectionstats WHERE gateway_id = '$gateways'  ",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [
+                      {
+                        "name": "uplink_count",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "downlink_count",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "txin",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "txok",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "lpps",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "rxin",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "rxok",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "rxfw",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "ackr",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "9bb98b99-0123-4456-b89a-b185bf71e9f6",
+                      "properties": {
+                        "field": "gateway_id",
+                        "operator": "equal",
+                        "value": [
+                          "$gateways"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "99b8b888-89ab-4cde-b012-3185bf6347da",
+                  "type": "group"
+                },
+                "whereString": "gateway_id = '$gateways'"
+              },
+              "table": "gatewayconnectionstats"
+            }
+          ],
+          "title": "Gateway Time connection Information",
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "displayMode": "color-text",
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 9,
+            "x": 15,
+            "y": 11
+          },
+          "id": 5,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "9.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "rawQuery": true,
+              "rawSql": "SELECT min_round_trip_times, max_round_trip_times, median_round_trip_times, count_round_trip_times FROM gatewayconnectionstats WHERE gateway_id = '$gateways'  ",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [
+                      {
+                        "name": "min_round_trip_times",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "max_round_trip_times",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "median_round_trip_times",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "count_round_trip_times",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "9bb98b99-0123-4456-b89a-b185bf71e9f6",
+                      "properties": {
+                        "field": "gateway_id",
+                        "operator": "equal",
+                        "value": [
+                          "$gateways"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "99b8b888-89ab-4cde-b012-3185bf6347da",
+                  "type": "group"
+                },
+                "whereString": "gateway_id = '$gateways'"
+              },
+              "table": "gatewayconnectionstats"
+            }
+          ],
+          "title": "Gateway- Network Server connection Statistics",
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "displayMode": "color-text",
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 16
+          },
+          "id": 6,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "9.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "rawQuery": true,
+              "rawSql": "SELECT min_freq_band_0, max_freq_band_0, dl_utilization_limit_band_0, min_freq_band_1, max_freq_band_1, dl_utilization_limit_band_1, dl_utilization_band_1, min_freq_band_2, max_freq_band_2, dl_utilization_limit_band_2, dl_utilization_band_2, min_freq_band_3, max_freq_band_3, dl_utilization_limit_band_3, min_freq_band_4, max_freq_band_4, dl_utilization_limit_band_4, min_freq_band_5, max_freq_band_5, dl_utilization_limit_band_5 FROM gatewayconnectionstats WHERE gateway_id = '$gateways'  ",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "parameters": [
+                      {
+                        "name": "min_freq_band_0",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "max_freq_band_0",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "dl_utilization_limit_band_0",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "min_freq_band_1",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "max_freq_band_1",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "dl_utilization_limit_band_1",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "dl_utilization_band_1",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "min_freq_band_2",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "max_freq_band_2",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "dl_utilization_limit_band_2",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "dl_utilization_band_2",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "min_freq_band_3",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "max_freq_band_3",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "dl_utilization_limit_band_3",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "min_freq_band_4",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "max_freq_band_4",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "dl_utilization_limit_band_4",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "min_freq_band_5",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "max_freq_band_5",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "dl_utilization_limit_band_5",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "9bb98b99-0123-4456-b89a-b185bf71e9f6",
+                      "properties": {
+                        "field": "gateway_id",
+                        "operator": "equal",
+                        "value": [
+                          "$gateways"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "99b8b888-89ab-4cde-b012-3185bf6347da",
+                  "type": "group"
+                },
+                "whereString": "gateway_id = '$gateways'"
+              },
+              "table": "gatewayconnectionstats"
+            }
+          ],
+          "title": "Gateway- Network Server connection Statistics",
+          "type": "table"
+        }
+      ],
+      "title": "Gateway Connection Status",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 10,
+      "panels": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 4,
+            "x": 0,
+            "y": 2
+          },
+          "id": 19,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "/^count$/",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT COUNT(dev_addr) FROM nodemetadataul WHERE dev_addr = '$nodes'  ",
+              "refId": "B",
+              "sql": {
+                "columns": [
+                  {
+                    "name": "COUNT",
+                    "parameters": [
+                      {
+                        "name": "dev_addr",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "bbbbab8b-4567-489a-bcde-f185c3f46243",
+                      "properties": {
+                        "field": "dev_addr",
+                        "operator": "equal",
+                        "value": [
+                          "$nodes"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "88aabba8-89ab-4cde-b012-3185c3da97b1",
+                  "type": "group"
+                },
+                "whereString": "dev_addr = '$nodes'"
+              },
+              "table": "nodemetadataul"
+            }
+          ],
+          "title": "Total Number of Uplink received packets",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 4,
+            "x": 4,
+            "y": 2
+          },
+          "id": 25,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "/^count$/",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT count (f_cnt)\nFROM  (SELECT generate_series(min(f_cnt), max(f_cnt)) FROM nodemetadataul  WHERE  dev_addr= '$nodes') n(f_cnt)\nLEFT   JOIN nodemetadataul n1 USING (f_cnt)\nWHERE  n1.f_cnt IS NULL;\n\n",
+              "refId": "B",
+              "sql": {
+                "columns": [
+                  {
+                    "name": "COUNT",
+                    "parameters": [
+                      {
+                        "name": "dev_addr",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "bbbbab8b-4567-489a-bcde-f185c3f46243",
+                      "properties": {
+                        "field": "dev_addr",
+                        "operator": "equal",
+                        "value": [
+                          "$nodes"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "88aabba8-89ab-4cde-b012-3185c3da97b1",
+                  "type": "group"
+                },
+                "whereString": "dev_addr = '$nodes'"
+              },
+              "table": "nodemetadataul"
+            }
+          ],
+          "title": "Total Number of Loss  Sent packets",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 4,
+            "x": 8,
+            "y": 2
+          },
+          "id": 29,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "last"
+              ],
+              "fields": "/^count$/",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT sampling_period_sec FROM node  WHERE dev_addr = '$nodes' \n",
+              "refId": "B",
+              "sql": {
+                "columns": [
+                  {
+                    "name": "COUNT",
+                    "parameters": [
+                      {
+                        "name": "dev_addr",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "bbbbab8b-4567-489a-bcde-f185c3f46243",
+                      "properties": {
+                        "field": "dev_addr",
+                        "operator": "equal",
+                        "value": [
+                          "$nodes"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "88aabba8-89ab-4cde-b012-3185c3da97b1",
+                  "type": "group"
+                },
+                "whereString": "dev_addr = '$nodes'"
+              },
+              "table": "nodemetadataul"
+            }
+          ],
+          "title": "sampling_period_sec",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 4,
+            "x": 20,
+            "y": 2
+          },
+          "id": 21,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "/^count$/",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT COUNT( DISTINCT gateway_id) FROM nodemetadataul WHERE dev_addr = '$nodes'",
+              "refId": "B",
+              "sql": {
+                "columns": [
+                  {
+                    "name": "COUNT",
+                    "parameters": [
+                      {
+                        "name": "gateway_id",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "name": "gateway_id",
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "bbbbab8b-4567-489a-bcde-f185c3f46243",
+                      "properties": {
+                        "field": "dev_addr",
+                        "operator": "equal",
+                        "value": [
+                          "$nodes"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "88aabba8-89ab-4cde-b012-3185c3da97b1",
+                  "type": "group"
+                },
+                "whereString": "dev_addr = '$nodes'"
+              },
+              "table": "nodemetadataul"
+            }
+          ],
+          "title": "Total Number of Connected Gateways",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 7
+          },
+          "id": 14,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "time_series",
+              "rawQuery": true,
+              "rawSql": "SELECT received_at_tti AS \"time\", snr FROM nodemetadataul WHERE dev_addr = '$nodes' ",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "alias": "\"time\"",
+                    "parameters": [
+                      {
+                        "name": "received_at_tti",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "snr",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "b9b8abba-cdef-4012-b456-7185c0bda519",
+                      "properties": {
+                        "field": "dev_addr",
+                        "operator": "equal",
+                        "value": [
+                          "$nodes"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "99b8b888-89ab-4cde-b012-3185bf6347da",
+                  "type": "group"
+                },
+                "whereString": "dev_addr = '$nodes'"
+              },
+              "table": "nodemetadataul"
+            }
+          ],
+          "title": "Node SNR From The Connected Gateways",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 7
+          },
+          "id": 15,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "time_series",
+              "rawQuery": true,
+              "rawSql": "SELECT received_at_tti AS \"time\", rssi FROM nodemetadataul WHERE (dev_addr = '$nodes' AND gateway_id = '$gateways') ",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "alias": "\"time\"",
+                    "parameters": [
+                      {
+                        "name": "received_at_tti",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "rssi",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "b9b8abba-cdef-4012-b456-7185c0bda519",
+                      "properties": {
+                        "field": "dev_addr",
+                        "operator": "equal",
+                        "value": [
+                          "$nodes"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    },
+                    {
+                      "id": "98a8bb98-cdef-4012-b456-7185c3e544ea",
+                      "properties": {
+                        "field": "gateway_id",
+                        "operator": "equal",
+                        "value": [
+                          "$gateways"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "99b8b888-89ab-4cde-b012-3185bf6347da",
+                  "type": "group"
+                },
+                "whereString": "(dev_addr = '$nodes' AND gateway_id = '$gateways')"
+              },
+              "table": "nodemetadataul"
+            }
+          ],
+          "title": "Node RSSI From The Selected Gateway",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 15
+          },
+          "id": 12,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "builder",
+              "format": "time_series",
+              "rawSql": "SELECT received_at_tti AS \"time\", snr FROM nodemetadataul WHERE (dev_addr = '$nodes' AND gateway_id = '$gateways') LIMIT 50 ",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "alias": "\"time\"",
+                    "parameters": [
+                      {
+                        "name": "received_at_tti",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "snr",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "b9b8abba-cdef-4012-b456-7185c0bda519",
+                      "properties": {
+                        "field": "dev_addr",
+                        "operator": "equal",
+                        "value": [
+                          "$nodes"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    },
+                    {
+                      "id": "98a8bb98-cdef-4012-b456-7185c3e544ea",
+                      "properties": {
+                        "field": "gateway_id",
+                        "operator": "equal",
+                        "value": [
+                          "$gateways"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "99b8b888-89ab-4cde-b012-3185bf6347da",
+                  "type": "group"
+                },
+                "whereString": "(dev_addr = '$nodes' AND gateway_id = '$gateways')"
+              },
+              "table": "nodemetadataul"
+            }
+          ],
+          "title": "Node SNR From The Selected Gateway",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 15
+          },
+          "id": 16,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "time_series",
+              "rawQuery": true,
+              "rawSql": "SELECT received_at_tti AS \"time\", rssi FROM nodemetadataul WHERE dev_addr = '$nodes' ",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "alias": "\"time\"",
+                    "parameters": [
+                      {
+                        "name": "received_at_tti",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "rssi",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "b9b8abba-cdef-4012-b456-7185c0bda519",
+                      "properties": {
+                        "field": "dev_addr",
+                        "operator": "equal",
+                        "value": [
+                          "$nodes"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "99b8b888-89ab-4cde-b012-3185bf6347da",
+                  "type": "group"
+                },
+                "whereString": "dev_addr = '$nodes'"
+              },
+              "table": "nodemetadataul"
+            }
+          ],
+          "title": "Node RSSI From The Connected Gateways",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 23
+          },
+          "id": 23,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "time_series",
+              "rawQuery": true,
+              "rawSql": "SELECT received_at_gw AS \"time\", num_rx_replica FROM packetreplicametadata WHERE dev_addr = '$nodes' ",
+              "refId": "A",
+              "sql": {
+                "columns": [
+                  {
+                    "alias": "\"time\"",
+                    "parameters": [
+                      {
+                        "name": "received_at_gw",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "num_rx_replica",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "bbba8a89-4567-489a-bcde-f185c3ed8325",
+                      "properties": {
+                        "field": "dev_addr",
+                        "operator": "equal",
+                        "value": [
+                          "$nodes"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "88aabba8-89ab-4cde-b012-3185c3da97b1",
+                  "type": "group"
+                },
+                "whereString": "dev_addr = '$nodes'"
+              },
+              "table": "packetreplicametadata"
+            },
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "time_series",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT received_at_gw AS \"time\", tot_rx_replica FROM packetreplicametadata  WHERE dev_addr = '$nodes' ",
+              "refId": "B",
+              "sql": {
+                "columns": [
+                  {
+                    "alias": "\"time\"",
+                    "parameters": [
+                      {
+                        "name": "received_at_gw",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "tot_rx_replica",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [],
+                  "id": "88aabba8-89ab-4cde-b012-3185c3da97b1",
+                  "type": "group"
+                }
+              },
+              "table": "packetreplicametadata"
+            }
+          ],
+          "title": "Total Number of Received Replicas",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 2,
+                "pointSize": 10,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 23
+          },
+          "id": 18,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "time_series",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "SELECT received_at_gw AS \"time\", tot_loss_replica FROM packetreplicametadata WHERE dev_addr = '$nodes' ",
+              "refId": "B",
+              "sql": {
+                "columns": [
+                  {
+                    "alias": "\"time\"",
+                    "parameters": [
+                      {
+                        "name": "received_at_gw",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  },
+                  {
+                    "parameters": [
+                      {
+                        "name": "tot_loss_replica",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "aba9a999-89ab-4cde-b012-3185c3f0d498",
+                      "properties": {
+                        "field": "dev_addr",
+                        "operator": "equal",
+                        "value": [
+                          "$nodes"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "88aabba8-89ab-4cde-b012-3185c3da97b1",
+                  "type": "group"
+                },
+                "whereString": "dev_addr = '$nodes'"
+              },
+              "table": "packetreplicametadata"
+            }
+          ],
+          "title": "Total Number of Loss Replicas",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "mappings": []
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 6,
+            "x": 0,
+            "y": 31
+          },
+          "id": 27,
+          "options": {
+            "displayLabels": [
+              "percent"
+            ],
+            "legend": {
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "values": [
+                "percent"
+              ],
+              "width": 50
+            },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "9.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "select spreading_factor,\n      (Count(*)*100 / cast( (Select Count(*) FROM nodemetadataul  WHERE  dev_addr= '$nodes' AND gateway_id='$gateways') as float)) as Percentage\nFROM nodemetadataul  WHERE  dev_addr= '$nodes' AND gateway_id='$gateways'\ngroup by 1\norder by 2 desc",
+              "refId": "B",
+              "sql": {
+                "columns": [
+                  {
+                    "name": "COUNT",
+                    "parameters": [
+                      {
+                        "name": "gateway_id",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "name": "gateway_id",
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "bbbbab8b-4567-489a-bcde-f185c3f46243",
+                      "properties": {
+                        "field": "dev_addr",
+                        "operator": "equal",
+                        "value": [
+                          "$nodes"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "88aabba8-89ab-4cde-b012-3185c3da97b1",
+                  "type": "group"
+                },
+                "whereString": "dev_addr = '$nodes'"
+              },
+              "table": "nodemetadataul"
+            }
+          ],
+          "title": "Distribution Of The Received Packet's Spreading Factor",
+          "type": "piechart"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "mappings": []
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 6,
+            "x": 6,
+            "y": 31
+          },
+          "id": 28,
+          "options": {
+            "displayLabels": [
+              "percent"
+            ],
+            "legend": {
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "values": [
+                "percent"
+              ],
+              "width": 50
+            },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "9.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "select frequency,\n      (Count(*)*100 / cast( (Select Count(*) FROM nodemetadataul  WHERE  dev_addr= '$nodes' AND gateway_id='$gateways') as float)) as Percentage\nFROM nodemetadataul  WHERE  dev_addr= '$nodes' AND gateway_id='$gateways'\ngroup by 1\norder by 2 desc",
+              "refId": "B",
+              "sql": {
+                "columns": [
+                  {
+                    "name": "COUNT",
+                    "parameters": [
+                      {
+                        "name": "gateway_id",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "name": "gateway_id",
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "bbbbab8b-4567-489a-bcde-f185c3f46243",
+                      "properties": {
+                        "field": "dev_addr",
+                        "operator": "equal",
+                        "value": [
+                          "$nodes"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "88aabba8-89ab-4cde-b012-3185c3da97b1",
+                  "type": "group"
+                },
+                "whereString": "dev_addr = '$nodes'"
+              },
+              "table": "nodemetadataul"
+            }
+          ],
+          "title": "Distribution Of The Received Packet's Frequency",
+          "type": "piechart"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "mappings": []
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 6,
+            "x": 12,
+            "y": 31
+          },
+          "id": 26,
+          "options": {
+            "displayLabels": [
+              "percent"
+            ],
+            "legend": {
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "values": [
+                "percent"
+              ],
+              "width": 50
+            },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "9.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "select gateway_id, \n      (Count(*)*100 / cast( (Select Count(*) FROM nodemetadataul  WHERE  dev_addr= '$nodes' ) as float)) as Percentage\nFROM nodemetadataul  WHERE  dev_addr= '$nodes'   \ngroup by 1\norder by 2 desc",
+              "refId": "B",
+              "sql": {
+                "columns": [
+                  {
+                    "name": "COUNT",
+                    "parameters": [
+                      {
+                        "name": "gateway_id",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "name": "gateway_id",
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "bbbbab8b-4567-489a-bcde-f185c3f46243",
+                      "properties": {
+                        "field": "dev_addr",
+                        "operator": "equal",
+                        "value": [
+                          "$nodes"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "88aabba8-89ab-4cde-b012-3185c3da97b1",
+                  "type": "group"
+                },
+                "whereString": "dev_addr = '$nodes'"
+              },
+              "table": "nodemetadataul"
+            }
+          ],
+          "title": "Distribution Of The Received Packet",
+          "type": "piechart"
+        },
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "FyhCLMT4k"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "displayMode": "auto",
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "gateway_id"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 232
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "count"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 144
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 6,
+            "x": 18,
+            "y": 31
+          },
+          "id": 24,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "9.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "postgres",
+                "uid": "FyhCLMT4k"
+              },
+              "editorMode": "code",
+              "format": "table",
+              "hide": false,
+              "rawQuery": true,
+              "rawSql": "select gateway_id, count(*),\n      (Count(*)*100 / cast( (Select Count(*) FROM nodemetadataul  WHERE  dev_addr= '$nodes') as float)) as Percentage\nFROM nodemetadataul  WHERE  dev_addr= '$nodes'\ngroup by 1\norder by 2 desc",
+              "refId": "B",
+              "sql": {
+                "columns": [
+                  {
+                    "name": "COUNT",
+                    "parameters": [
+                      {
+                        "name": "gateway_id",
+                        "type": "functionParameter"
+                      }
+                    ],
+                    "type": "function"
+                  }
+                ],
+                "groupBy": [
+                  {
+                    "property": {
+                      "name": "gateway_id",
+                      "type": "string"
+                    },
+                    "type": "groupBy"
+                  }
+                ],
+                "limit": 50,
+                "whereJsonTree": {
+                  "children1": [
+                    {
+                      "id": "bbbbab8b-4567-489a-bcde-f185c3f46243",
+                      "properties": {
+                        "field": "dev_addr",
+                        "operator": "equal",
+                        "value": [
+                          "$nodes"
+                        ],
+                        "valueSrc": [
+                          "value"
+                        ],
+                        "valueType": [
+                          "text"
+                        ]
+                      },
+                      "type": "rule"
+                    }
+                  ],
+                  "id": "88aabba8-89ab-4cde-b012-3185c3da97b1",
+                  "type": "group"
+                },
+                "whereString": "dev_addr = '$nodes'"
+              },
+              "table": "nodemetadataul"
+            }
+          ],
+          "title": "Gateway ID Of The Connected Gateways",
+          "type": "table"
+        }
+      ],
+      "title": "Node KPIs",
+      "type": "row"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "ws_c_2",
+          "value": "ws_c_2"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "FyhCLMT4k"
+        },
+        "definition": "SELECT deployment_id FROM public.deployment",
+        "hide": 0,
+        "includeAll": false,
+        "label": "deployments",
+        "multi": false,
+        "name": "deployments",
+        "options": [],
+        "query": "SELECT deployment_id FROM public.deployment",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "cluster1",
+          "value": "cluster1"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "FyhCLMT4k"
+        },
+        "definition": "SELECT cluster_id FROM public.cluster WHERE deployment_id = '$deployments'",
+        "hide": 0,
+        "includeAll": false,
+        "label": "clusters",
+        "multi": false,
+        "name": "clusters",
+        "options": [],
+        "query": "SELECT cluster_id FROM public.cluster WHERE deployment_id = '$deployments'",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "network_2",
+          "value": "network_2"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "FyhCLMT4k"
+        },
+        "definition": "SELECT network_id FROM public.network  WHERE  cluster_id ='$clusters'",
+        "hide": 0,
+        "includeAll": false,
+        "label": "networks",
+        "multi": false,
+        "name": "networks",
+        "options": [],
+        "query": "SELECT network_id FROM public.network  WHERE  cluster_id ='$clusters'",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "20726-mrn-7276ff00080e1097",
+          "value": "20726-mrn-7276ff00080e1097"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "FyhCLMT4k"
+        },
+        "definition": "SELECT gateway_tti_id FROM public.gateway  WHERE  network_id ='$networks'",
+        "hide": 0,
+        "includeAll": false,
+        "label": "gateways",
+        "multi": false,
+        "name": "gateways",
+        "options": [],
+        "query": "SELECT gateway_tti_id FROM public.gateway  WHERE  network_id ='$networks'",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "27014D68",
+          "value": "27014D68"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "FyhCLMT4k"
+        },
+        "definition": "SELECT dev_addr FROM public.nodemetadataul  WHERE  gateway_id ='$gateways'  ",
+        "hide": 0,
+        "includeAll": false,
+        "label": "nodes",
+        "multi": false,
+        "name": "nodes",
+        "options": [],
+        "query": "SELECT dev_addr FROM public.nodemetadataul  WHERE  gateway_id ='$gateways'  ",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "2023-01-17T10:09:43.962Z",
+    "to": "2023-01-17T13:16:32.842Z"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Gateway_KPI",
+  "uid": "AXar2mTVk",
+  "version": 64,
+  "weekStart": ""
+}
